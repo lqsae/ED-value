@@ -31,7 +31,7 @@ def get_dict_index(infile):#获取亲本和子代的位置索引
     f=parse_vcf(infile)
     for line in f:
         if line.strip().startswith('#'):
-            head=head=line.strip().split('\t')
+            head=line.strip().split('\t')
             break
     for name in name_list:
         dict_index[name]=head.index(name)
@@ -132,10 +132,13 @@ def format(infile,type):#主函数
             if flag1:#过滤纯合差异位点
                 flag2=filter_genetype(type,dict_depth,name_list)
                 if flag2:#过滤深度
-                    ed=get_ed(name_list,type,dict_depth)
-                    m=get_depth_S(name_list,type,dict_depth)
-                    format_data=get_line(tag,m,ed)
-                    print(format_data) 
+                    try:
+                        ed=get_ed(name_list,type,dict_depth)
+                        m=get_depth_S(name_list,type,dict_depth)
+                        format_data=get_line(tag,m,ed)
+                        print(format_data)
+                    except:
+                        pass
 
 
 def get_args():
